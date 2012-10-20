@@ -1,5 +1,7 @@
 <?
 include "konek.php";
+$start=$_GET['start'];
+$limit=$_GET['limit'];
 $totalData=0;
 $qry="SELECT count(*) as jumlah FROM tb1 ";
 $result = mysql_query($qry);

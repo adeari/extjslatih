@@ -145,7 +145,6 @@ var gridData = new xg.GridPanel({
                                             buttons: Ext.MessageBox.OK,
                                             fn:function(){
                                                 currentPosition=(storeData.currentPage-1)*pageOption.getValue();
-                                                if (currentPosition<0) currentPosition=1;
                                                     storeData.load({
                                                         params:{
                                                             start:currentPosition, 

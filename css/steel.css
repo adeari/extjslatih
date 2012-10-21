@@ -1,3 +1,10 @@
+.vv {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-top: 0px;
+   margin-left: 0px;
+}
 .addDataIcon {
   background-image: url('../ext-4.1.1a-gpl/resources/themes/images/default/dd/drop-add.gif');
 }

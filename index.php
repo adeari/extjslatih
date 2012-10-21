@@ -1,7 +1,7 @@
 <script type="text/javascript" src="ext-4.1.1a-gpl/ext-all.js"></script>
 <link rel="stylesheet" type="text/css" href="ext-4.1.1a-gpl/resources/css/ext-all.css" />
 <link rel="stylesheet" type="text/css" href="css/steel.css" />
-
+<p class="vv"><img id="g" src="img/extanim32.gif"> Loading .....</p>
 <script>
 var xg = Ext.grid;
 var storepage = new Ext.data.SimpleStore({
@@ -151,6 +151,7 @@ var gridData = new xg.GridPanel({
         itemcontextmenu:  function(dv, deData, item, index, e){
             e.stopEvent();
             var gridMenu = Ext.create('Ext.menu.Menu', {
+                width: 100,
                             items: [{                                
                                 text: 'Edit',
                                 iconCls: 'editBtn',
@@ -288,8 +289,15 @@ Ext.onReady(function(){
         forceLayout: true,
         title: 'Data Mahasiswa',
         items: formMain,
-        renderTo:document.body
+        renderTo:document.body,
+        listeners:{
+            render:function(){
+                Ext.fly('g').dom.innerHTML = '';
+            }
+        }
     });
     storeData.load();
+    
+    
 });
 </script>

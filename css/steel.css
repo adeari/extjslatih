@@ -1,0 +1,18 @@
+.addDataIcon {
+  background-image: url('../ext-4.1.1a-gpl/resources/themes/images/default/dd/drop-add.gif');
+}
+.saveDataIcon {
+  background-image: url('../img/save.gif');
+}
+.resetBtn {
+  background-image: url('../img/stop.png');
+}
+.cancelBtn {
+  background-image: url('../img/cross.gif');
+}
+.editBtn {
+  background-image: url('../img/edit.png');
+}
+.delBtn {
+  background-image: url('../img/del.png');
+}

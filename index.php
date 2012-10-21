@@ -1,5 +1,6 @@
 <script type="text/javascript" src="ext-4.1.1a-gpl/ext-all.js"></script>
 <link rel="stylesheet" type="text/css" href="ext-4.1.1a-gpl/resources/css/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="css/steel.css" />
 
 <script>
 var xg = Ext.grid;
@@ -78,7 +79,40 @@ var myBarData = new Ext.PagingToolbar({
     items:['-',pageOption,' records']
 });
 
+function ShowEditform(deData) {
+    formData.setVisible(true);
+    formData.setTitle('Edit Data '+deData.data.nama);
+    Ext.getCmp('id').setValue(deData.data.id);
+    Ext.getCmp('nama').setValue(deData.data.nama);
+    Ext.getCmp('alamat').setValue(deData.data.alamat);
+}
 
+function delData(deData){
+    Ext.MessageBox.show({
+        title: 'Hapus Data',
+        icon:Ext.MessageBox.QUESTION,
+        msg: 'Hapus data '+deData.data.nama+' ?',
+        buttons: Ext.MessageBox.YESNO,
+        fn:function(btn){
+            if(btn=='yes') {
+            Ext.Ajax.request({
+                url: 'del.php',
+                params: {
+                    id: deData.data.id
+                },
+                success: function(response){
+                    currentPosition=(storeData.currentPage-1)*pageOption.getValue();
+                            storeData.load({
+                                params:{
+                                    start:currentPosition,
+                                    limit:pageOption.getValue()
+                                }
+                    });
+                }
+              });
+        }}
+    });
+}
 
 var gridData = new xg.GridPanel({
     id:'gridData',
@@ -111,52 +145,35 @@ var gridData = new xg.GridPanel({
     title: 'Your CC List',
     bbar:myBarData,
     listeners : {
-        itemdblclick: function(dv, record, item, index, e) {
-            formData.setVisible(true);
-            var recid = gridData.getSelectionModel().getCurrentPosition();
-            var deData=gridData.getStore().getAt(recid.row);
-            Ext.getCmp('id').setValue(deData.data.id);
-            Ext.getCmp('nama').setValue(deData.data.nama);
-            Ext.getCmp('alamat').setValue(deData.data.alamat);
+        itemdblclick: function(dv, deData, item, index, e) {
+             ShowEditform(deData);
         },
-        render: function(grid) {
-             gridData.el.on('keyup',
+        itemcontextmenu:  function(dv, deData, item, index, e){
+            e.stopEvent();
+            var gridMenu = Ext.create('Ext.menu.Menu', {
+                            items: [{                                
+                                text: 'Edit',
+                                iconCls: 'editBtn',
+                                handler:function(){
+                                    ShowEditform(deData);
+                                }
+                           },{        
+                                text: 'Delete',
+                                iconCls: 'delBtn',
+                                handler:function(){
+                                    delData(deData);
+                                }   
+                           }]
+                        });
+            gridMenu.showAt(e.getXY());
+        },
+        render: function(grid,deData, item, index, e) {
+             grid.el.on('keyup',
                      function(e) {
                         if (e.getKey()==46) {
                             var recid = gridData.getSelectionModel().getCurrentPosition();
                             var deData=gridData.getStore().getAt(recid.row);
-                            Ext.MessageBox.show({
-                                title: 'Hapus Data',
-                                icon:Ext.MessageBox.QUESTION,
-                                msg: 'Hapus data '+deData.data.nama+' ?',
-                                buttons: Ext.MessageBox.YESNO,
-                                fn:function(btn){
-                                    if(btn=='yes') {
-                                    Ext.Ajax.request({
-                                        url: 'del.php',
-                                        params: {
-                                            id: deData.data.id
-                                        },
-                                        success: function(response){
-                                            Ext.MessageBox.show({
-                                            title: 'Success',
-                                            icon:Ext.MessageBox.INFO,
-                                            msg: 'Data '+deData.data.nama+' terhapus',
-                                            buttons: Ext.MessageBox.OK,
-                                            fn:function(){
-                                                currentPosition=(storeData.currentPage-1)*pageOption.getValue();
-                                                    storeData.load({
-                                                        params:{
-                                                            start:currentPosition, 
-                                                            limit:pageOption.getValue()
-                                                        }
-                                                    });
-                                            }                                    
-                                        });
-                                        }
-                                      });
-                                }}
-                            });
+                            delData(deData);
                         }
                      }, this);
         }
@@ -166,9 +183,11 @@ var gridData = new xg.GridPanel({
 var addToolbar= new Ext.Toolbar({
     items:[{
         text:'Add',
+        iconCls:'addDataIcon',
         tooltip:'Add data',
         handler:function(){
             formData.setVisible(true);
+            formData.setTitle('Add Data');
             Ext.getCmp('id').reset();
             Ext.getCmp('nama').reset();
             Ext.getCmp('alamat').reset();
@@ -178,7 +197,6 @@ var addToolbar= new Ext.Toolbar({
 
 var formData=new Ext.FormPanel({
     frame: true,
-    title:'Add Data',
     labelWidth: 30,
     width:300,
     hidden:true,
@@ -203,6 +221,7 @@ var formData=new Ext.FormPanel({
     buttons:[{
         type:'submit',
         text:'Save',
+        iconCls:'saveDataIcon',
         handler:function(){
             formData.getForm().submit({
                         url:'addData.php', 
@@ -231,12 +250,14 @@ var formData=new Ext.FormPanel({
         }
     },{
         text:'Reset',
+        iconCls: 'resetBtn',
         handler:function(){
             Ext.getCmp('nama').reset();
             Ext.getCmp('alamat').reset();
         }
     },{
         text:'Close',
+        iconCls:'cancelBtn',
         handler:function(){
             formData.setVisible(false);
         }

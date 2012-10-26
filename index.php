@@ -1,14 +1,14 @@
+<link
+	rel="stylesheet" type="text/css" href="css/steel.css" />
+<div id="loading-mask"></div>
+<div id="loading">
+	<div class="loading-indicator"><img src="img/loaduu.gif"></div>
+</div>
 <script type="text/javascript" src="ext-4.1.1a-gpl/ext-all.js"></script>
 <link
 	rel="stylesheet" type="text/css"
 	href="ext-4.1.1a-gpl/resources/css/ext-all.css" />
-<link
-	rel="stylesheet" type="text/css" href="css/steel.css" />
 
-<div id="loading-mask"></div>
-<div id="loading">
-	<div class="loading-indicator"><img src="img/gear_ani.gif"></div>
-</div>
 <script>
 var xg = Ext.grid;
 var storepage = new Ext.data.SimpleStore({

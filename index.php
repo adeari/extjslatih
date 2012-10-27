@@ -1,9 +1,8 @@
 <link
 	rel="stylesheet" type="text/css" href="css/steel.css" />
-<div id="loading-mask"></div>
-<div id="loading">
-	<div class="loading-indicator"><img src="img/loaduu.gif"></div>
-</div>
+<div id="immmu" class="center">
+			<img src="img/loaduu.gif">
+			</div>
 <script type="text/javascript" src="ext-4.1.1a-gpl/ext-all.js"></script>
 <link
 	rel="stylesheet" type="text/css"
@@ -282,8 +281,7 @@ var formMain = new Ext.Panel({
 });
 
 var ii= function(){
-	Ext.get('loading').remove();
-	   Ext.get('loading-mask').fadeOut({remove:true});
+	Ext.get('immmu').remove();
 }
 
 Ext.onReady(function(){

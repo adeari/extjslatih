@@ -37,24 +37,97 @@ p {
     Ext.onReady(function() {
         Ext.QuickTips.init();
 
+		
+var menus = [];
+        var menus1 =Ext.create('Ext.tree.Panel', {
+    renderTo: Ext.getBody(),
+    title: 'Simple Tree',
+    width: 150,
+    height: 150,
+	rootVisible: false,
+	lines: false,
+	containerScroll: true,
+	useArrows: true,
+	
+alternateClassName: ['Ext.tree.TreePanel', 'Ext.TreePanel'],
+    requires: ['Ext.tree.View', 'Ext.selection.TreeModel', 'Ext.tree.Column', 'Ext.data.TreeStore'],
+    viewType: 'treeview',
+    selType: 'treemodel',
 
-        var menus = [];
-    for (var menu = 0; menu < 4; menu++) {
-        var menuConfig = {
-            title: 'Menu ' + (menu + 1),
-            xtype: 'menu',
-            cls: 'my-menu',
-            showSeparator: false,
-            floating: false,
-            hideHeader: false,
-            items: [],
-            collapsed: menu > 0
-        };
-        for (var menuItem = 0; menuItem < 10; menuItem++) {
-            menuConfig.items.push({text: 'Menu ' + (menu + 1) + ', item ' + (menuItem + 1)});
-        }
-        menus.push(menuConfig);
+  
+	
+	
+	
+	singleExpand:true,
+    root: {
+        children: [
+            {
+                text: 'Customer',
+                children: [
+                    {
+                        text: 'Active',
+                        leaf: true
+                    },{
+                        text: 'Disable',
+                        leaf: true
+                    }
+                ]
+            },{
+                text: 'Vendor',
+                children: [
+                    {
+                        text: 'Active',
+                        leaf: true
+                    },{
+                        text: 'Disable',
+                        leaf: true
+                    }
+                ]
+            },{
+                text: 'Employee',
+                children: [
+                    {
+                        text: 'Active',
+                        leaf: true
+                    },{
+                        text: 'Disable',
+                        leaf: true
+                    }
+                ]
+            }
+        ]
     }
+});
+menus.push(menus1);
+var menus2 = Ext.create('Ext.tree.Panel', {
+    title: 'Simple Tree',
+    width: 150,
+    height: 150,
+	rootVisible: false,
+	lines: false,
+    root: {
+		children: [
+            { text: "Menu Option 1",id:'iii', leaf: true },
+			{ text: "Menu Option 1", leaf: true }
+			]
+    }
+});
+        menus.push(menus2);
+		
+		var menus3 = Ext.create('Ext.tree.Panel', {
+    title: 'Simple Tree',
+    width: 150,
+    height: 150,
+	rootVisible: false,
+	lines: false,
+    root: {
+		children: [
+            { text: "Menu Option 1", leaf: true },
+			{ text: "Menu Option 1", leaf: true }
+			]
+    }
+});
+        menus.push(menus3);
 
         var viewport = Ext.create('Ext.Viewport', {
             id: 'border-example',

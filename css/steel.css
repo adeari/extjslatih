@@ -6,7 +6,7 @@ width:20%;
 
 margin-top:12%;
 }
-
+.x-tree-no-icon { display: none !important; }
 .addDataIcon {
   background-image: url('../ext-4.1.1a-gpl/resources/themes/images/default/dd/drop-add.gif');
 }

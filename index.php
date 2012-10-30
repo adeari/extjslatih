@@ -42,14 +42,7 @@ var storeData = Ext.create('Ext.data.JsonStore', {
         sorters: [{
             property: 'id',
             direction: 'ASC'
-        }],
-        listeners:{
-            load:function(a){
-                if (a.getCount()<1&&a.currentPage>1) {
-                    myBarData.movePrevious();
-                }
-            }
-        }
+        }]
     });
 var pageOption=new Ext.form.ComboBox({
     store: storepage,
@@ -64,10 +57,9 @@ var pageOption=new Ext.form.ComboBox({
     width:50,
     listeners:{
         select:function(a){
-            currentPosition=(storeData.currentPage-1)*a.getValue();
             storeData.load({
                 params:{
-                    start:currentPosition, 
+                    start:0, 
                     limit:a.getValue()
                 }
             });
@@ -280,9 +272,6 @@ var formMain = new Ext.Panel({
     items:[gridData,addToolbar,formData]
 });
 
-var ii= function(){
-	Ext.get('immmu').remove();
-}
 
 Ext.onReady(function(){
     Ext.QuickTips.init();
@@ -302,7 +291,6 @@ Ext.onReady(function(){
         renderTo:document.body
     });
     storeData.load();
-    Ext.Ajax.on('requestcomplete',ii ,Ext.getBody());
-    
+    Ext.get('immmu').remove();
 });
 </script>

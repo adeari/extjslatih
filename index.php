@@ -1,13 +1,16 @@
-<link
-	rel="stylesheet" type="text/css" href="css/steel.css" />
-<div id="immmu" class="center">
+<div id="immmu">
+<table width="100%" height="100%">
+<tr><td align="center">
 			<img src="img/loaduu.gif">
-			</div>
+</td></tr>
+</table>
+</div>
 <script type="text/javascript" src="ext-4.1.1a-gpl/ext-all.js"></script>
 <link
 	rel="stylesheet" type="text/css"
 	href="ext-4.1.1a-gpl/resources/css/ext-all.css" />
-
+<link
+	rel="stylesheet" type="text/css" href="css/steel.css" />
 <script>
 var xg = Ext.grid;
 var storepage = new Ext.data.SimpleStore({

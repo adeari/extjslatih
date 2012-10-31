@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
 <title>Super Menu</title>
-<link rel="stylesheet" type="text/css" href="css/steel.css" />
+
 <style type="text/css">
 p {
 	margin: 5px;
@@ -25,13 +25,20 @@ p {
 </style>
 </head>
 <body>
-	<div id="immmu" class="center">
+
+<div id="immmu">
+<table width="100%" height="100%">
+<tr><td align="center">
 			<img src="img/loaduu.gif">
-			</div>
+</td></tr>
+</table>
+</div>
+
 </body>
 <link rel="stylesheet" type="text/css"
 	href="ext-4.1.1a-gpl/resources/css/ext-all.css">
 <script type="text/javascript" src="ext-4.1.1a-gpl/ext-all.js"></script>
+<link rel="stylesheet" type="text/css" href="css/steel.css" />
 <script type="text/javascript">
 
     Ext.onReady(function() {
@@ -39,8 +46,19 @@ p {
 
 		
 var menus = [];
+
+var storeData = Ext.create('Ext.data.TreeStore', {
+        proxy: {
+            type: 'ajax',
+            url: 'treeStore.php',
+            reader: {
+                type: 'json',
+                root: 'nodes',
+            }
+        }
+    });
+
         var menus1 =Ext.create('Ext.tree.Panel', {
-    renderTo: Ext.getBody(),
     title: 'Simple Tree',
     width: 150,
     height: 150,
@@ -48,55 +66,8 @@ var menus = [];
 	lines: false,
 	containerScroll: true,
 	useArrows: true,
-	
-alternateClassName: ['Ext.tree.TreePanel', 'Ext.TreePanel'],
-    requires: ['Ext.tree.View', 'Ext.selection.TreeModel', 'Ext.tree.Column', 'Ext.data.TreeStore'],
-    viewType: 'treeview',
-    selType: 'treemodel',
-
-  
-	
-	
-	
-	singleExpand:true,
-    root: {
-        children: [
-            {
-                text: 'Customer',
-                children: [
-                    {
-                        text: 'Active',
-                        leaf: true
-                    },{
-                        text: 'Disable',
-                        leaf: true
-                    }
-                ]
-            },{
-                text: 'Vendor',
-                children: [
-                    {
-                        text: 'Active',
-                        leaf: true
-                    },{
-                        text: 'Disable',
-                        leaf: true
-                    }
-                ]
-            },{
-                text: 'Employee',
-                children: [
-                    {
-                        text: 'Active',
-                        leaf: true
-                    },{
-                        text: 'Disable',
-                        leaf: true
-                    }
-                ]
-            }
-        ]
-    }
+	store: storeData,	
+	singleExpand:true
 });
 menus.push(menus1);
 var menus2 = Ext.create('Ext.tree.Panel', {

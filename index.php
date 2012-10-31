@@ -152,7 +152,6 @@ var gridData = new xg.GridPanel({
         itemcontextmenu:  function(dv, deData, item, index, e){
             e.stopEvent();
             var gridMenu = Ext.create('Ext.menu.Menu', {
-                width: 100,
                             items: [{                                
                                 text: 'Edit',
                                 iconCls: 'editBtn',

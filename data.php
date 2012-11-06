@@ -1,5 +1,5 @@
-<?
-include "konek.php";
+<?php
+include ("konek.php");
 $start=$_GET['start'];
 $limit=$_GET['limit'];
 $totalData=0;

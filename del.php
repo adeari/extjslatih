@@ -1,4 +1,4 @@
-<?
+<?php
 include "konek.php";
 $id=$_POST['id'];
 if (strlen($id)>0) {

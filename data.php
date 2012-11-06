@@ -11,14 +11,15 @@ if ($row = mysql_fetch_array($result)) {
 $qry="SELECT id,nama,alamat FROM tb1 ";
 $qry.= " LIMIT ".$start." , ".$limit;
 $result = mysql_query($qry);
-$data="";
+$data=array();
+$i=0;
 while($row = mysql_fetch_array($result))
   {
-  $data.="{\"id\":\"". $row['id'] . "\",\"nama\":\"". $row['nama'] . "\",\"alamat\":\"" . $row['alamat']."\"},";
+  	$data[$i]=array("id"=>$row['id'],"nama"=>$row['nama'],"alamat"=>$row['alamat']);
+  	$i++;
   }
-  if (strlen($data)>0) {
-    $data=substr($data,0,strlen($data)-1);
-  }
-echo "{\"totalData\":\"".$totalData."\",\"data\":[".$data."]}";
+$data1=array("totalData"=>$totalData
+,"data"=>$data);
+echo json_encode($data1);
 mysql_close($link);
 ?>

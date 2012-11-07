@@ -67,7 +67,28 @@ var storeData = Ext.create('Ext.data.TreeStore', {
 	containerScroll: true,
 	useArrows: true,
 	store: storeData,	
-	singleExpand:true
+	singleExpand:true,
+	 listeners: {
+	        itemclick: function(view, record, item, index) {
+		        var idSelected=record.data.id;
+		        var eastPanel=Ext.getCmp('east-panel');
+		        if (idSelected=='11')
+		        {
+		        	eastPanel.collapse( Ext.Component.DIRECTION_LEFT , true );
+		        	setTimeout(function() { eastPanel.setVisible(false);},800);
+		        } else if (idSelected=='12')
+		        {
+		        	eastPanel.setVisible(true);
+		        	setTimeout(function() { eastPanel.expand(true);},500);
+		        } else if (idSelected=='21') {
+		        	
+		        	
+		        } else if (idSelected=='22') {
+		        	
+		        	
+		        }
+	        }
+	    }
 });
 menus.push(menus1);
 var menus2 = Ext.create('Ext.tree.Panel', {
@@ -120,16 +141,16 @@ var menus2 = Ext.create('Ext.tree.Panel', {
                 region: 'east',
                 animCollapse: true,
                 collapsible: true,
+                id:'east-panel',
                 split: true,
                 width: 225,
                 minSize: 175,
                 maxSize: 400,
-                margins: '0 5 0 0',
-                activeTab: 1
+                margins: '0 5 0 0'
             }, {
                 region: 'west',
                 stateId: 'navigation-panel',
-                id: 'west-panel',
+                title:'west',
                 split: true,
                 width: 200,
                 minWidth: 175,

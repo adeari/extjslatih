@@ -79,6 +79,7 @@ var storeData = Ext.create('Ext.data.TreeStore', {
 		        {
 		        	eastPanel.collapse( Ext.Component.DIRECTION_LEFT , true );
 		        	setTimeout(function() { eastPanel.setVisible(false);},800);
+		        	setTimeout(function() {Ext.getCmp('center-panel').update('<iframe id="mainframe" frameborder="no" src="index.php" width="100%" height="100%"></iframe>');},700);
 		        } else if (idSelected=='12')
 		        {
 			        if (eastPanel.isVisible()) {
@@ -88,6 +89,7 @@ var storeData = Ext.create('Ext.data.TreeStore', {
 		        		eastPanel.setVisible(true);
 		        		setTimeout(function() { eastPanel.expand(true);},500);
 			        }
+			        setTimeout(function() {Ext.getCmp('center-panel').update('<iframe id="mainframe" frameborder="no" src="index.php" width="100%" height="100%"></iframe>');},700);
 		        } else if (idSelected=='21') {
 		        	Ext.getCmp('center-panel').update('<iframe id="mainframe" frameborder="no" src="load.php" width="100%" height="100%"></iframe>');
 		        } else if (idSelected=='22') {
@@ -172,11 +174,9 @@ var menus2 = Ext.create('Ext.tree.Panel', {
              	},
 	             items: menus,
             },
-            Ext.create('Ext.tab.Panel', {
+            Ext.create('Ext.Panel', {
                 region: 'center',
-				border:0,
-                id:'center-panel',
-                activeTab: 0
+                id:'center-panel'
             })]
         });
         Ext.get('immmu').remove();

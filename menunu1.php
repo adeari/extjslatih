@@ -47,6 +47,8 @@ p {
 		
 var menus = [];
 
+
+
 var storeData = Ext.create('Ext.data.TreeStore', {
         proxy: {
             type: 'ajax',
@@ -72,19 +74,24 @@ var storeData = Ext.create('Ext.data.TreeStore', {
 	        itemclick: function(view, record, item, index) {
 		        var idSelected=record.data.id;
 		        var eastPanel=Ext.getCmp('east-panel');
+		        
 		        if (idSelected=='11')
 		        {
 		        	eastPanel.collapse( Ext.Component.DIRECTION_LEFT , true );
 		        	setTimeout(function() { eastPanel.setVisible(false);},800);
 		        } else if (idSelected=='12')
 		        {
-		        	eastPanel.setVisible(true);
-		        	setTimeout(function() { eastPanel.expand(true);},500);
+			        if (eastPanel.isVisible()) {
+			        	eastPanel.collapse( Ext.Component.DIRECTION_LEFT , true );
+			        	setTimeout(function() { eastPanel.expand(true);},500);
+			        } else {
+		        		eastPanel.setVisible(true);
+		        		setTimeout(function() { eastPanel.expand(true);},500);
+			        }
 		        } else if (idSelected=='21') {
-		        	
-		        	
+		        	Ext.getCmp('center-panel').update('<iframe id="mainframe" frameborder="no" src="load.php" width="100%" height="100%"></iframe>');
 		        } else if (idSelected=='22') {
-		        	
+		        	Ext.getCmp('center-panel').update('<iframe id="mainframe" frameborder="no" src="index.php" width="100%" height="100%"></iframe>');
 		        	
 		        }
 	        }
@@ -124,11 +131,12 @@ var menus2 = Ext.create('Ext.tree.Panel', {
         var viewport = Ext.create('Ext.Viewport', {
             id: 'border-example',
             layout: 'border',
+            renderTo:document.body,
             items: [
             Ext.create('Ext.Component', {
                 region: 'north',
                 height: 32,
-                margins: '0 5 0 0',
+                margins: '0 5 0 0'
             }), {
                 region: 'south',
                 split: true,
@@ -139,9 +147,9 @@ var menus2 = Ext.create('Ext.tree.Panel', {
                 margins: '0 0 0 0'
             }, {
                 region: 'east',
-                animCollapse: true,
                 collapsible: true,
                 id:'east-panel',
+                animFloat: true,
                 split: true,
                 width: 225,
                 minSize: 175,
@@ -166,7 +174,8 @@ var menus2 = Ext.create('Ext.tree.Panel', {
             },
             Ext.create('Ext.tab.Panel', {
                 region: 'center',
-                deferredRender: false,
+				border:0,
+                id:'center-panel',
                 activeTab: 0
             })]
         });

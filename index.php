@@ -285,7 +285,6 @@ Ext.onReady(function(){
         autoScroll: false,
         autoHeight: true,
         border: false,
-        width: Ext.getBody().getWidth()-Ext.getScrollBarWidth(true),
         layout: 'fit',
         forceLayout: true,
         title: 'Data Mahasiswa',

@@ -151,7 +151,6 @@ var menus2 = Ext.create('Ext.tree.Panel', {
                 region: 'east',
                 collapsible: true,
                 id:'east-panel',
-                animFloat: true,
                 split: true,
                 width: 225,
                 minSize: 175,
@@ -166,7 +165,6 @@ var menus2 = Ext.create('Ext.tree.Panel', {
                 minWidth: 175,
                 maxWidth: 400,
                 collapsible: true,
-                animCollapse: true,
                 layout: {
                  type: 'accordion',
                  multi: false,

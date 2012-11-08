@@ -77,17 +77,17 @@ var storeData = Ext.create('Ext.data.TreeStore', {
 		        
 		        if (idSelected=='11')
 		        {
-		        	eastPanel.collapse( Ext.Component.DIRECTION_LEFT , true );
+		        	eastPanel.toggleCollapse(false);
 		        	setTimeout(function() { eastPanel.setVisible(false);},800);
 		        	setTimeout(function() {Ext.getCmp('center-panel').update('<iframe id="mainframe" frameborder="no" src="index.php" width="100%" height="100%"></iframe>');},700);
 		        } else if (idSelected=='12')
 		        {
 			        if (eastPanel.isVisible()) {
-			        	eastPanel.collapse( Ext.Component.DIRECTION_LEFT , true );
-			        	setTimeout(function() { eastPanel.expand(true);},500);
+			        	eastPanel.toggleCollapse(false);
+			        	setTimeout(function() { eastPanel.toggleCollapse(true);},500);
 			        } else {
 		        		eastPanel.setVisible(true);
-		        		setTimeout(function() { eastPanel.expand(true);},500);
+		        		setTimeout(function() { eastPanel.toggleCollapse(true);},500);
 			        }
 			        setTimeout(function() {Ext.getCmp('center-panel').update('<iframe id="mainframe" frameborder="no" src="index.php" width="100%" height="100%"></iframe>');},700);
 		        } else if (idSelected=='21') {

@@ -60,13 +60,8 @@ var pageOption=new Ext.form.ComboBox({
     width:50,
     listeners:{
         select:function(a){
-            storeData.load({
-                params:{
-                    start:0, 
-                    limit:a.getValue()
-                }
-            });
-            storeData.pageSize=a.getValue();
+        	storeData.pageSize=a.getValue(); 
+        	myBarData.moveFirst();
         }
     }
 });
